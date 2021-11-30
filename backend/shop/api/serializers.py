@@ -48,9 +48,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
 class CartItemSerializer(serializers.ModelSerializer):
     """Сериализатор товара в корзине"""
-    customer = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    customer = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:
         model = CartItem
@@ -59,9 +57,7 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 class CartItemDetailSerializer(serializers.ModelSerializer):
     """Сериализатор товара в корзине"""
-    customer = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    customer = serializers.PrimaryKeyRelatedField(read_only=True,)
     item = ItemSerializer()
 
     class Meta:
@@ -70,10 +66,8 @@ class CartItemDetailSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
-    """Сериализатор товара в корзине"""
-    customer = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    """Сериализатор корзины"""
+    customer = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:
         model = Cart
@@ -81,22 +75,19 @@ class CartSerializer(serializers.ModelSerializer):
 
 
 class CartRetrieveSerializer(serializers.ModelSerializer):
-    """Сериализатор товара в корзине"""
-    customer = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    """Сериализатор корзине - просмотр"""
+    customer = serializers.PrimaryKeyRelatedField(read_only=True,)
     related_items = CartItemDetailSerializer(many=True)
 
     class Meta:
         model = Cart
+        # TODO: add exclude instead of fields
         fields = ['id', 'customer', 'total_items', 'final_price', 'created', 'related_items', 'updated', ]
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    """Сериализатор товара в корзине"""
-    customer = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    """Сериализатор заказа"""
+    customer = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:
         model = Order
@@ -110,7 +101,7 @@ class OrderStatusSerializer(serializers.ModelSerializer):
 
 
 class OrderDetailSerializer(serializers.ModelSerializer):
-    """Сериализатор товара в корзине"""
+    """Сериализатор заказа - просмотр"""
     cart = CartRetrieveSerializer()
     status = OrderStatusSerializer()
 
@@ -121,19 +112,16 @@ class OrderDetailSerializer(serializers.ModelSerializer):
 
 class SupportSerializer(serializers.ModelSerializer):
     """Сериализатор сообщения в техподдержку"""
-    user = serializers.PrimaryKeyRelatedField(
-        read_only=True,
-    )
+    user = serializers.PrimaryKeyRelatedField(read_only=True,)
 
     class Meta:
         model = Support
         fields = '__all__'
-        # exclude = ['user', ]
 
 
 class PayPalOrderSerializer(serializers.ModelSerializer):
+    """Сериализатор оплаты"""
     email = serializers.EmailField(required=True)
-
     first_name = serializers.CharField(max_length=200, required=False)
     last_name = serializers.CharField(max_length=200, required=False)
     phone = serializers.CharField(max_length=200, required=False)
@@ -146,11 +134,6 @@ class PayPalOrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        # fields = ['email',
-        #           'cart_items',
-        #           'total_items',
-        #           'final_price'
-        #           ]
         fields = ['email',
                   'first_name',
                   'last_name',

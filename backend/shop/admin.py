@@ -44,17 +44,14 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-
     list_display = ['id', 'customer', 'status']
 
 
 admin.site.register(ItemType, ItemTypeAdmin)
-# admin.site.register(ItemImage, ItemImageAdmin)
 admin.site.register(ItemMaterialColor, ItemMaterialColorAdmin)
 admin.site.register(ItemMaterial)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Page, )
-# admin.site.register(CartItem, )
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Support, )

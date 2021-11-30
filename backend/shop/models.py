@@ -1,24 +1,15 @@
 from django.db import models
 from versatileimagefield.fields import VersatileImageField, PPOIField
-
-# class ItemImage(models.Model):
-#     image = VersatileImageField(
-#         'Image',
-#         upload_to='images/',
-#         ppoi_field='image_ppoi'
-#     )
-#     image_ppoi = PPOIField()
-#
-#     def __str__(self):
-#         return str(self.id)
 from users.models import UserAccount
 
 
-class ItemMaterial(models.Model):
-    title = models.CharField(max_length=255, )
-
+class BaseModel(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
     updated = models.DateTimeField(auto_now=True, editable=False, null=True)
+
+
+class ItemMaterial(BaseModel):
+    title = models.CharField(max_length=255, )
 
     class Meta:
         verbose_name_plural = 'Item Materials'
@@ -27,11 +18,8 @@ class ItemMaterial(models.Model):
         return self.title
 
 
-class ItemType(models.Model):
+class ItemType(BaseModel):
     title = models.CharField(max_length=255)
-
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     class Meta:
         verbose_name_plural = 'Item Types'
@@ -40,7 +28,7 @@ class ItemType(models.Model):
         return self.title
 
 
-class ItemMaterialColor(models.Model):
+class ItemMaterialColor(BaseModel):
     title = models.CharField(max_length=255, )
     image = VersatileImageField(
         'Image',
@@ -50,14 +38,11 @@ class ItemMaterialColor(models.Model):
     image_ppoi = PPOIField()
     color = models.CharField(max_length=15, default='#000000', null=True, blank=True)
 
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
-
     def __str__(self):
         return self.title
 
 
-class Item(models.Model):
+class Item(BaseModel):
     """Товары"""
     title = models.CharField(max_length=255, )
     image = VersatileImageField(
@@ -66,29 +51,24 @@ class Item(models.Model):
         ppoi_field='image_ppoi'
     )
     image_ppoi = PPOIField()
-
     type = models.ForeignKey(ItemType, on_delete=models.CASCADE, )
     material = models.ForeignKey(ItemMaterial, on_delete=models.CASCADE, )
     item_material_color = models.ManyToManyField(ItemMaterialColor, blank=True, related_name='items')
-
     description = models.TextField(null=True, blank=True, )
     price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     is_tile = models.BooleanField(default=False)
     published = models.BooleanField(default=False, help_text='published in front')
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return self.title
 
 
-class CartItem(models.Model):
+class CartItem(BaseModel):
     """Товары в корзине"""
     customer = models.ForeignKey(UserAccount, on_delete=models.CASCADE, blank=True)
     cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='related_items', null=True, blank=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     comment = models.CharField(max_length=255, blank=True)
-
     image = VersatileImageField(
         'Image',
         upload_to='images/',
@@ -106,11 +86,8 @@ class CartItem(models.Model):
     ausschnitt = models.PositiveIntegerField(default=1, )
     ausklinkung = models.PositiveIntegerField(default=1, )
     polierte_kante = models.BooleanField(default=False)
-
     qty_item = models.PositiveIntegerField(default=1, help_text='количество плит')
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text='Общая цена')
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return f'CartItem {self.id}'
@@ -121,16 +98,13 @@ class CartItem(models.Model):
         super().save(*args, **kwargs)
 
 
-class Cart(models.Model):
+class Cart(BaseModel):
     """
     Корзина
     """
     customer = models.ForeignKey(UserAccount, on_delete=models.CASCADE, blank=True)
     total_items = models.PositiveIntegerField(default=0, blank=True)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True, blank=True)
-
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return str(self.id)
@@ -152,7 +126,7 @@ class OrderStatus(models.Model):
         return f'{self.title}'
 
 
-class Order(models.Model):
+class Order(BaseModel):
     """
     Заказ
     """
@@ -161,15 +135,13 @@ class Order(models.Model):
     comment = models.TextField(null=True, blank=True)
     paypal_id = models.CharField(max_length=255, blank=True)
     status = models.ForeignKey('OrderStatus', on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return f'{self.id}'
 
 
 # TODO: перенести в отдельный App
-class Page(models.Model):
+class Page(BaseModel):
     """
     Posts, news and actions
     """
@@ -177,8 +149,6 @@ class Page(models.Model):
     image = models.ImageField(blank=True, null=True)
     text = models.TextField(null=True)
     published = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return self.title
@@ -192,13 +162,11 @@ class Constants(models.Model):
         return self.title
 
 
-class Support(models.Model):
+class Support(BaseModel):
     user = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
     subject = models.CharField(max_length=20, )
     message = models.CharField(max_length=20, )
     email = models.EmailField(max_length=255, unique=True)
-    created = models.DateTimeField(auto_now_add=True, editable=False, null=True, )
-    updated = models.DateTimeField(auto_now=True, editable=False, null=True)
 
     def __str__(self):
         return self.subject
