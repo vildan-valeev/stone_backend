@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0afda4"],{"0fa9":function(n,t,e){"use strict";e.r(t);var r=e("7a23"),a={class:""},c=Object(r["j"])("iframe",{src:"http://graphnewzone/src/",frameborder:"0",width:"1920",height:"900"},null,-1),d=[c];function i(n,t,e,c,i,o){return Object(r["C"])(),Object(r["i"])("div",a,d)}var o={data:function(){return{}},mounted:function(){}},u=e("d959"),s=e.n(u);const f=s()(o,[["render",i]]);t["default"]=f}}]);
+//# sourceMappingURL=chunk-2d0afda4.b2db0709.js.map

@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+#    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/:/app/
+    env_file: .env.dev
+    ports:
+      - 8000:8000
+    networks:
+      - shop
+  nginx:
+    container_name: nginx
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    env_file: .env.dev
+#    command: sh -c "nginx -g \"daemon off;\""
+    volumes:
+      - ./frontend/data/nginx_dev:/etc/nginx/conf.d
+      - ./frontend/dist:/app/
+#      - ./frontend/grapheditor:/graph/
+    networks:
+      - shop
+    depends_on:
+      - "backend"
+
+#  grapheditor:
+#    container_name: grapheditor
+#    build:
+#      context: ./frontend/grapheditor
+#      dockerfile: Dockerfile
+#    restart: unless-stopped
+#    ports:
+#      - 6000:6000
+#    volumes:
+#      - ./frontend/grapheditor:/graph/
+#    networks:
+#      - shop
+#    depends_on:
+#      - "backend"
+
+networks:
+   shop:
+       driver: bridge

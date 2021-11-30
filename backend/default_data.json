@@ -1,0 +1,109 @@
+[
+{
+    "model": "shop.itemmaterial",
+    "pk": 1,
+    "fields": {
+        "title": "rrr",
+        "created": "2021-09-29T12:43:14.773Z",
+        "updated": "2021-09-29T12:43:14.773Z"
+    }
+},
+{
+    "model": "shop.itemmaterial",
+    "pk": 2,
+    "fields": {
+        "title": "fff",
+        "created": "2021-09-29T12:43:17.239Z",
+        "updated": "2021-09-29T12:43:17.239Z"
+    }
+},
+{
+    "model": "shop.itemtype",
+    "pk": 1,
+    "fields": {
+        "title": "ttt",
+        "created": "2021-09-29T12:43:26.083Z",
+        "updated": "2021-09-29T12:43:26.083Z"
+    }
+},
+{
+    "model": "shop.itemtype",
+    "pk": 2,
+    "fields": {
+        "title": "hhhhh",
+        "created": "2021-09-29T12:43:28.966Z",
+        "updated": "2021-09-29T12:43:28.966Z"
+    }
+},
+{
+    "model": "shop.itemmaterialcolor",
+    "pk": 1,
+    "fields": {
+        "title": "rtrt",
+        "image": "images/mem_tlBZnIV.jpg",
+        "image_ppoi": "0.5x0.5",
+        "color": "#000000",
+        "created": "2021-09-29T12:43:51.473Z",
+        "updated": "2021-09-29T12:43:51.474Z"
+    }
+},
+{
+    "model": "shop.itemmaterialcolor",
+    "pk": 2,
+    "fields": {
+        "title": "ghgh",
+        "image": "images/photo_2021-05-15_17-31-47.jpg",
+        "image_ppoi": "0.5x0.5",
+        "color": "#000000",
+        "created": "2021-09-29T12:44:01.272Z",
+        "updated": "2021-09-29T12:44:01.272Z"
+    }
+},
+{
+    "model": "shop.item",
+    "pk": 1,
+    "fields": {
+        "title": "trtr",
+        "type": 1,
+        "material": 1,
+        "description": "dfgdf",
+        "published": true,
+        "created": "2021-09-29T12:44:19.567Z",
+        "updated": "2021-09-29T12:44:19.567Z",
+        "item_material_color": [
+            1
+        ]
+    }
+},
+{
+    "model": "shop.item",
+    "pk": 2,
+    "fields": {
+        "title": "hfhf",
+        "type": 2,
+        "material": 2,
+        "description": "sdfsdf",
+        "published": true,
+        "created": "2021-09-29T12:44:41.078Z",
+        "updated": "2021-09-29T12:44:41.078Z",
+        "item_material_color": [
+            2
+        ]
+    }
+},
+{
+    "model": "users.useraccount",
+    "fields": {
+        "password": "pbkdf2_sha256$260000$Es83aL6KwKOat35v3z6G4U$TwWHjDlF5Q920PDNEs6pUSKnD0MJyWSSWAV/vMfaHc8=",
+        "last_login": "2021-09-29T05:33:08.253Z",
+        "is_superuser": true,
+        "email": "vvv@vvv.ru",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_staff": true,
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]

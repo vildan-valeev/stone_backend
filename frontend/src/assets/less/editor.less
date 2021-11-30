@@ -1,0 +1,104 @@
+@import "./smart-grid.less";
+
+.editor{
+  overflow-x: hidden;
+  &__wrapper{
+    display: flex;
+    height: calc(100vh - 107px);
+    flex-wrap: wrap;
+  }
+  &__canvas{
+    width: 60%;
+  }
+  &__sidebarLeft, 
+  &__sidebarRight{
+    width: calc(20% - 60px);
+    background: #FAFAFA;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  &__sidebarRight{
+    padding-top: 0;
+  }
+  &__subitem{
+    cursor: pointer;
+    margin-top: 10px;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+  &__sublist{
+    transition: all .5s;
+    max-height: 500px;
+    // overflow: hidden;
+    opacity: 1;
+  }
+  &__itemtext{
+    cursor: pointer;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--main);
+    padding-left: 20px;
+    margin-top: 7px;
+  }
+  &__btnGroup{
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    & button{
+      width: 125px;
+    }
+  }
+}
+.sidebarRight{
+  &__label{
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  &__title{
+    margin-top: 20px;
+  }
+  &__deleteBtn{
+    margin-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 175px;
+  }
+  &__pricewrapper{
+    margin-top: auto;
+  }
+  &__pricetext{
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  &__price{
+    font-weight: 600;
+    font-size: 30px;
+    display: block;
+  }
+  &__pay{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    min-width: 175px;
+  }
+}
+#canvas{
+  border: 1px solid #000;
+  margin: auto;
+  display: block;
+}
+
+
+.list-enter-active, .list-leave-active{
+  max-height: 0;
+  opacity: 0;
+  transition: all .5s;
+}
+
+.list-enter, .list-leave-to{
+  transition: all .5s;
+  max-height: 0px;
+  opacity: 0;
+
+}

@@ -1,0 +1,166 @@
+@import "./smart-grid.less";
+.DeinSteinDesign{
+  &__wrapper{
+    .wrapper()
+  }
+}
+.breadcrumbs{
+  & span{
+    margin: 0 8px;
+  }
+  &__active{
+    color: var(--main);
+  }
+}
+.shop{
+  margin-top: 37px;
+  &__row{
+    display: flex;
+    margin-top: 52px;
+    justify-content: space-between;
+  }
+  &__sidebar{
+    width: 19%;
+  }
+  &__items{
+    width: 81%;
+    .u-row-flex(50px)
+  }
+  &__item{
+    .u-col(50px);
+    .u-size(6, 12, 50px);
+    margin-bottom: 80px;
+  }
+  &__title{
+    text-align: left;
+    &::after{
+      content: none;
+    }
+  }
+}
+.sidebar{
+  &__item{
+    margin-bottom: 45px;
+  }
+  &__sublist{
+    margin-top: 7px;
+  }
+  &__itemtitle{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+  }
+  &__subitem{
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  &__selected{
+    border: 2px solid var(--main);
+    padding-left: 26px;
+    padding-top: 9px;padding-bottom: 9px;
+    padding-right: 11px;
+    display: inline-block;
+    margin-top: 16px;
+    margin-right: 16px;
+    &--img{
+      padding-left: 5px;
+    }
+    & span {
+      margin-right: 29px;
+    }
+    & img {
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+  &__selectedWrapper{
+    margin-top: 6px; 
+    margin-bottom: 45px;
+  }
+  &__clear{
+    margin-top: 20px;
+  }
+}
+.selectedImg{
+  width: 26px; 
+  height: 26px;
+  margin-right: 29px;
+}
+.shopitem{
+  &__title{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+  }
+  &__link{
+    display: block;
+  }
+  &__btn{
+    margin-top: 14px;
+    width: 207px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+  &__header{
+    display: flex;
+    align-items: center;
+    margin-top: 21px;
+    justify-content: space-between;
+  }
+  &__stock{
+    padding: 5px 17px;
+    font-size: 14px;
+  }
+  &__text{
+    max-width: 371px;
+    margin-top: 12px;
+  }
+  &__footer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  &__priceinfo{
+    display: block;
+    font-size: 16px;
+  }
+  &__price{
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+  }
+}
+.appRange{
+  & .slider-horizontal .slider-handle{
+    border-radius: 0;
+    height: 11px;
+    width: 17px;
+    background-color: var(--main);
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  & .slider-connect{
+    background-color: var(--main);
+  }
+  & .slider-horizontal{
+    height: 2px;
+  }
+  &__wrapper{
+    display:flex;
+    justify-content: space-between;
+    align-items:center
+  }
+  &__input{
+    max-width: 96px;
+  }
+  &__line{
+    height: 2px;
+    background-color: var(--main);
+    width: 16px;
+  }
+  &__slider{
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+#    command: python manage.py runserver 0.0.0.0:8000
+    env_file: .env.prod
+    volumes:
+      - ./backend/:/app/
+    ports:
+      - 8000:8000
+    networks:
+      - shop
+  nginx:
+    container_name: nginx
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    env_file: .env.prod
+    volumes:
+      - ./frontend/data/nginx:/etc/nginx/conf.d
+      - ./frontend/data/certbot/conf:/etc/letsencrypt
+      - ./frontend/data/certbot/www:/var/www/certbot
+      - ./frontend/dist:/app/
+    networks:
+      - shop
+    depends_on:
+      - "backend"
+#    command: sh -c "./wait-for-it.sh backend:8000 -- nginx -g 'daemon off;'"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    restart: unless-stopped
+    volumes:
+      - ./frontend/data/certbot/conf:/etc/letsencrypt
+      - ./frontend/data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+#    networks:
+#      - shop
+    depends_on:
+      - "backend"
+
+networks:
+   shop:
+       driver: bridge

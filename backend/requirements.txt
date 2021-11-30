@@ -1,0 +1,15 @@
+Django
+django-cors-headers
+djangorestframework
+python-decouple
+drf-yasg
+django-versatileimagefield
+django-filter
+djangorestframework-jsonapi
+# requests
+# djangorestframework-simplejwt
+djoser
+# environs
+# gunicorn
+# psycopg2-binary
+# psycopg2

@@ -1,0 +1,11 @@
+FROM nginx:latest
+RUN mkdir /app
+# копируем файлы фронта
+COPY /dist /app
+# докидываем скрипт для ожидания запуска
+COPY wait-for-it.sh .
+# копируем конфиги nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY data/nginx/nginx.conf /etc/nginx/nginx.conf
+# открываем порты
+EXPOSE 8080 80 443 8000 6000
